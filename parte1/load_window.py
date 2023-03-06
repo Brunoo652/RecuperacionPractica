@@ -14,9 +14,9 @@ class LoadWindow(Gtk.Window):
         super().__init__()
         self.connect("destroy", Gtk.main_quit)
         self.set_border_width(60)
-        self.set_resizable(False)
+        self.set_resizable(True)
         self.spinner.props.active = True
 
-       # self.box.pack_start(self.label, True, True, 0)
-       # self.box.pack_start(self.spinner, True, True, 0)
+        self.box.pack_start(self.label, True, True, 0)
+        self.box.pack_start(self.spinner, True, True, 0)
         self.add(self.box)
