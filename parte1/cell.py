@@ -9,11 +9,9 @@ class Cell(Gtk.EventBox):
     def __init__(self, name, image):
         super().__init__()
         self.name = name
+        self.image = image
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
-        self.box.pack_start(Gtk.Label(label=name), False, False, 0)
-        self.box.pack_start(image, True, True, 0)
+#        self.box.pack_start(Gtk.Label(label=name), False, False, 0)
+#        self.box.pack_start(image, True, True, 0)
         self.add(box)
-        self.connect("button-realase-event", self.on_click)
 
-    def on_click(self, widget, event):
-        print("Se ha clicado " + self.name)

@@ -6,7 +6,8 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib
 import requests
 import threading
-from main_window import MainWindow2
+from main_window import MainWindow
+
 
 
 class LoadWindow(Gtk.Window):
@@ -35,25 +36,26 @@ class LoadWindow(Gtk.Window):
         thread.start()
 
     def load_json(self):
-        response = requests.get('https://github.com/CarlosAfundacion/EXAMEN/blob/main/games.json')
+        response = requests.get('https://raw.githubusercontent.com/CarlosAfundacion/EXAMEN/main/games.json')
         json_list = response.json()
 
         result = []
 
         for json_item in json_list:
-            name = json_item.get("name")
+            nombre = json_item.get("nombre")
             descripcion = json_item.get("descripcion")
             image_url = json_item.get("imagen_url")
-            r = requests.get("imagen_url", stream=True)
+            r = requests.get(image_url, stream=True)
             with open("temp.png", 'wb') as f:
                 shutil.copyfileobj(r.raw, f)
-            image = Gtk.image.new_from_file("temp.png")
-            result.append({"nombre": name}, {"descripcion": descripcion}, {"gtk_image": image})
+            image = Gtk.Image.new_from_file("temp.png")
+            result.append({"image_url": image})
+            result.append({"nombre": nombre})
 
         GLib.idle_add(self.start_main_window, result)
 
     def start_main_window(self, loaded_items_list):
-        win = MainWindow2(loaded_items_list)
+        win = MainWindow(loaded_items_list)
         win.show_all()
-        # self.disconnect_by_func(Gtk.main_quit)
+        self.disconnect_by_func(Gtk.main_quit)
         self.close()

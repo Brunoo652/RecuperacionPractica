@@ -4,7 +4,7 @@ from gi.repository import Gtk
 from cell import Cell
 
 
-class MainWindow2(Gtk.Window):
+class MainWindow(Gtk.Window):
     flowbox = Gtk.FlowBox()
 
     def __init__(self, data_source):
@@ -25,5 +25,5 @@ class MainWindow2(Gtk.Window):
         self.add(scrolled)
 
         for item in data_source:
-            cell = Cell(item.get("name"), item.get("gtk_image"))
+            cell = Cell(item.get("nombre"), item.get("image_url"))
             self.flowbox.add(cell)
