@@ -6,12 +6,13 @@ from gi.repository import Gtk
 class Cell(Gtk.EventBox):
     name = None
 
-    def __init__(self, name, image):
+    def __init__(self, name, description, image):
         super().__init__()
         self.name = name
         self.image = image
+       # self.descripcion = descripcion
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
-#        self.box.pack_start(Gtk.Label(label=name), False, False, 0)
-#        self.box.pack_start(image, True, True, 0)
+        #        self.box.pack_start(Gtk.Label(label=name), False, False, 0)
+        #        self.box.pack_start(image, True, True, 0)
         self.add(box)
 
